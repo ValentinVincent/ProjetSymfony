@@ -1,0 +1,13 @@
+Vous devrez faire une application de gestion d’étudiants dont voici les détails :
+- Un étudiant  peut être lié à zéro, un ou plusieurs projets
+- Un projet est défini par un nom, une nombre maximum d’étudiants lié à ce projet, une note et est lié à une matière.
+- Un étudiant est définis par un nom, un prénom, un age
+- Une matière est défini par un nom et un intervenant
+- Un intervenant est définis par un nom, un prénom, un age et est lié à des matières
+- Un intervenant ne peut pas avoir plus de 2 matières
+- Un étudiant ne peut pas avoir plus de 4 projets
+- Lorsque je vais sur le detail d’un étudiant je dois voir la moyenne des notes des projets sur lesquels il est lié.
+- Je dois pouvoir assigner à un projet uniquement les étudiants qui n’ont pas encore 4 projets et qui ne sont pas déjà lié a ce projet
+- Lorsque je vais sur le détail d’une matière, je dois voir la moyenne des notes des projets lié à cette matière
+- Lorsque je veux assigner un intervenant à un matière. La liste doit contenir uniquement les matières qui n’ont pas encore d’intervenant
+- N'oubliez pas de valider les formulaires (par exemple : une note ne peut pas être supérieur à 20 et inférieur à 0)
