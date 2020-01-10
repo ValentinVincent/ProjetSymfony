@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Welcome to Symfony!</title>
-    </head>
-    <body>
-        <h1>non</h1>
-    </body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #lightgray; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Gestion de projets étudiants</h1>
+</div>
+{% endblock %}
