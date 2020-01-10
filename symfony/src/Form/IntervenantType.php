@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Etudiant;
+use App\Entity\Intervenant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EtudiantType extends AbstractType
+class IntervenantType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class EtudiantType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Etudiant::class,
+            'data_class' => Intervenant::class,
         ]);
     }
 }

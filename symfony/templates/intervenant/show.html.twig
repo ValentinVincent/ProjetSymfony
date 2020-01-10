@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Intervenant{% endblock %}
+
+{% block body %}
+    <h1>Intervenant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ intervenant.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ intervenant.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ intervenant.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ intervenant.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('intervenant_index') }}">back to list</a>
+
+    <a href="{{ path('intervenant_edit', {'id': intervenant.id}) }}">edit</a>
+
+    {{ include('intervenant/_delete_form.html.twig') }}
+{% endblock %}

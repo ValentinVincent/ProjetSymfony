@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Etudiant;
-use Form\EtudiantType;
+use App\Form\EtudiantType;
 use App\Repository\EtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +21,12 @@ class EtudiantController extends AbstractController
     public function index(EtudiantRepository $etudiantRepository): Response
     {
         return $this->render('etudiant/index.html.twig', [
-            'etudiant' => $etudiantRepository->findAll(),
+            'etudiants' => $etudiantRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="account_new", methods={"GET","POST"})
+     * @Route("/new", name="etudiant_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -48,49 +48,47 @@ class EtudiantController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}", name="account_show", methods={"GET"})
-    //  */
-    // public function show(Etudiant $etudiant): Response
-    // {
-    //     $debitsCredits = array_merge($account->getCreditTransactions()->toArray(), $account->getDebitTransactions()->toArray());
-    //     return $this->render('account/show.html.twig', [
-    //         'account' => $account,
-    //         'debitsCredits' => $debitsCredits,
-    //     ]);
-    // }
+    /**
+     * @Route("/{id}", name="etudiant_show", methods={"GET"})
+     */
+    public function show(Etudiant $etudiant): Response
+    {
+        return $this->render('etudiant/show.html.twig', [
+            'etudiant' => $etudiant,
+        ]);
+    }
 
-    // /**
-    //  * @Route("/{id}/edit", name="account_edit", methods={"GET","POST"})
-    //  */
-    // public function edit(Request $request, Account $account): Response
-    // {
-    //     $form = $this->createForm(AccountType::class, $account);
-    //     $form->handleRequest($request);
+    /**
+     * @Route("/{id}/edit", name="etudiant_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Etudiant $etudiant): Response
+    {
+        $form = $this->createForm(EtudiantType::class, $etudiant);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
-    //         return $this->redirectToRoute('account_index');
-    //     }
+            return $this->redirectToRoute('etudiant_index');
+        }
 
-    //     return $this->render('account/edit.html.twig', [
-    //         'account' => $account,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
+        return $this->render('etudiant/edit.html.twig', [
+            'etudiant' => $etudiant,
+            'form' => $form->createView(),
+        ]);
+    }
 
-    // /**
-    //  * @Route("/{id}", name="account_delete", methods={"DELETE"})
-    //  */
-    // public function delete(Request $request, Account $account): Response
-    // {
-    //     if ($this->isCsrfTokenValid('delete'.$account->getId(), $request->request->get('_token'))) {
-    //         $entityManager = $this->getDoctrine()->getManager();
-    //         $entityManager->remove($account);
-    //         $entityManager->flush();
-    //     }
+    /**
+     * @Route("/{id}", name="etudiant_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Etudiant $etudiant): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$etudiant->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($etudiant);
+            $entityManager->flush();
+        }
 
-    //     return $this->redirectToRoute('account_index');
-    // }
+        return $this->redirectToRoute('etudiant_index');
+    }
 }
