@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Intervenant;
+use App\Entity\Matiere;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +17,12 @@ class IntervenantType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('age')
+            ->add('matiere', EntityType::class, [
+                'class' => Matiere::class,
+                'choice_label' => function ($matiere) {
+                    return $matiere->getNom();
+                }
+            ])
         ;
     }
 

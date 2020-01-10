@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class Etudiant
      * @ORM\Column(type="integer")
      */
     private $age;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projet", inversedBy="etudiants")
+     */
+    private $Projet;
+
+    public function __construct()
+    {
+        $this->Projet = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +80,32 @@ class Etudiant
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Projet[]
+     */
+    public function getProjet(): Collection
+    {
+        return $this->Projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->Projet->contains($projet)) {
+            $this->Projet[] = $projet;
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->Projet->contains($projet)) {
+            $this->Projet->removeElement($projet);
+        }
 
         return $this;
     }

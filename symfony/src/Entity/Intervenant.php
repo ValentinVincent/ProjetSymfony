@@ -34,7 +34,7 @@ class Intervenant
     private $age;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\matiere", mappedBy="intervenant")
+     * @ORM\OneToMany(targetEntity="App\Entity\Matiere", mappedBy="intervenant")
      */
     private $matiere;
 

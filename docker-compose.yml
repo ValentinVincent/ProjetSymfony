@@ -38,6 +38,17 @@ services:
         volumes:
             - ./logs/nginx:/var/log/nginx
             - ./symfony:/var/www/symfony
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        depends_on: 
+            - db
+        links:
+            - db:db
+        ports:
+            - "8888:80"
+        networks:
+            - db
     # elasticsearch:
     #     container_name: elasticsearch
     #     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
