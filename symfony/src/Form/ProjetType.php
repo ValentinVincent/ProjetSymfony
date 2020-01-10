@@ -15,26 +15,38 @@ class ProjetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $etudiant = $options['etudiant'];
         $builder
             ->add('nom')
             ->add('nbMax')
             ->add('note')
             ->add('matiere', EntityType::class, [
                 'class' => Matiere::class,
+                'required' => false,
                 'choice_label' => function ($matiere) {
                     return $matiere->getNom();
                 }
             ])
             ->add('etudiants', EntityType::class, [
+                'choice_value' => 'id',
                 'class' => Etudiant::class,
+                'required' => false,
                 'multiple' => true,
                 'expanded' => true,
-                'query_builder' => function () {
-                    return $this->createQueryBuilder('etudiant')
-                    ->setParameter('etudiant', $this);
+                'query_builder' => function (EtudiantRepository $er) use ($etudiant) {
+
+                    $in = $er ->createQueryBuilder('b')
+                        ->leftjoin('b.projets', 'p')
+                        ->groupBy('b.id')
+                        ->having('COUNT(p.id) < 4');
+                    // return $in;  
+                    return $er->createQueryBuilder('a')
+                        ->andWhere('a.id in (:etudiant)')
+                        ->orWhere('a.id IN ('.$in->getDQL().')')
+                        ->setParameter('etudiant', $etudiant);
                 },
-                'choice_label' => function ($er) {
-                    return $er->getNom();
+                'choice_label' => function ($etudiant) {
+                    return $etudiant->getNom();
                 }
             ]);
     }
@@ -43,6 +55,7 @@ class ProjetType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Projet::class,
+            'etudiant' => []
         ]);
     }
 }

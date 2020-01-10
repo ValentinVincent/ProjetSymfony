@@ -36,11 +36,11 @@ class Etudiant
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Projet", inversedBy="etudiants")
      */
-    private $Projet;
+    private $projets;
 
     public function __construct()
     {
-        $this->Projet = new ArrayCollection();
+        $this->Projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,17 +85,18 @@ class Etudiant
     }
 
     /**
-     * @return Collection|Projet[]
+     * @return Collection|Projets[]
      */
-    public function getProjet(): Collection
+    public function getProjets(): Collection
     {
-        return $this->Projet;
+        return $this->projets;
     }
 
     public function addProjet(Projet $projet): self
     {
-        if (!$this->Projet->contains($projet)) {
-            $this->Projet[] = $projet;
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->addEtudiant($this);
         }
 
         return $this;
@@ -103,8 +104,10 @@ class Etudiant
 
     public function removeProjet(Projet $projet): self
     {
-        if ($this->Projet->contains($projet)) {
-            $this->Projet->removeElement($projet);
+        if ($this->projets->contains($projet)) {
+            $this->projets->removeElement($projet);
+            $projet->removeEtudiant($this);
+
         }
 
         return $this;

@@ -39,7 +39,7 @@ class Projet
     private $matiere;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etudiant", mappedBy="Projet")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etudiant", mappedBy="projets")
      */
     private $etudiants;
 
@@ -113,7 +113,7 @@ class Projet
     {
         if (!$this->etudiants->contains($etudiant)) {
             $this->etudiants[] = $etudiant;
-            $etudiant->addProjet($this);
+            // $etudiant->addProjets($this);
         }
 
         return $this;
@@ -123,7 +123,7 @@ class Projet
     {
         if ($this->etudiants->contains($etudiant)) {
             $this->etudiants->removeElement($etudiant);
-            $etudiant->removeProjet($this);
+            // $etudiant->removeProjets($this);
         }
 
         return $this;
