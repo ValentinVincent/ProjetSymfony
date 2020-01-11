@@ -6,5 +6,8 @@
   "name": "symfony",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "encore": "^0.0.30-beta"
+  }
 }
