@@ -63,6 +63,7 @@ class MatiereController extends AbstractController
      */
     public function edit(Request $request, Matiere $matiere): Response
     {
+        $option['matiere'] = $matiere->getIntervenant();
         $form = $this->createForm(MatiereType::class, $matiere);
         $form->handleRequest($request);
 

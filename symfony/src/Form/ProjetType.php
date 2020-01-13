@@ -39,7 +39,6 @@ class ProjetType extends AbstractType
                         ->leftjoin('b.projets', 'p')
                         ->groupBy('b.id')
                         ->having('COUNT(p.id) < 4');
-                    // return $in;  
                     return $er->createQueryBuilder('a')
                         ->andWhere('a.id in (:etudiant)')
                         ->orWhere('a.id IN ('.$in->getDQL().')')
